@@ -1,0 +1,50 @@
+class Solution {
+public:
+    
+    //TC: O(2*(N*M))
+    //SC: O(1);
+    vector<vector<int>> print(vector<vector<int>> &matrix){
+        return matrix;
+    }
+    
+    void setZeroes(vector<vector<int>>& matrix) {
+        
+        int r = matrix.size();
+        int c = matrix[0].size();
+        //col0 gives indication whether 0 is present in 0th column or not
+        int col0 = 1;
+        
+        for(int i = 0; i < r; i++){
+            if(matrix[i][0] == 0){
+                //checking if column 0 has any zeroes present in it
+                //if yes then col0 = 0 which means that col0 has atleast one zero present in it
+                col0 = 0;
+            }
+            for(int j = 1; j < c; j++){
+                if(matrix[i][j] == 0){
+                    //marking the cell(i,0) and cell(0,j) to 0 if any cell(i,j) has a zero present in it 
+                    matrix[i][0] = 0;
+                    matrix[0][j] = 0;
+                }
+            }
+        }
+        //Traversing the matrix in reverse manner beacause col 0 and row 0 share cell(0,0) in common which may affect
+        //the numbers in resulting matrix.
+        for(int i = r-1; i >= 0; i--){
+            for(int j = c-1; j >= 1; j--){
+                if(matrix[i][0] == 0 || matrix[0][j] == 0){
+                    matrix[i][j] = 0;
+                }
+            }
+            if(col0 == 0){
+                matrix[i][0] = 0;
+            }
+        }
+        
+        //Printing the matrix
+        print(matrix);
+        
+           
+    }
+        
+};
