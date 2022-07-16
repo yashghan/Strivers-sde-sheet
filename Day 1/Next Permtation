@@ -1,0 +1,29 @@
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int n = nums.size(), k, l;
+        for(k = n-2; k >= 0; k--){
+            //num[k] < num[k+1] is the first instance that we are finding from left to right
+            //Hence all elements to the right of num[k+1] will be less than num[k+1];
+            
+            if(nums[k] < nums[k+1]){
+                break;
+            }
+        }
+        if(k < 0){
+            reverse(nums.begin(), nums.end());
+        }
+        else{
+            for(l = n-1; l > k; l--){
+                if(nums[k] < nums[l]){
+                    break;
+                }
+            }
+            swap(nums[k], nums[l]);
+            //We swap (num[l] > num[k]) with num[k] because we are finding the next greater element
+            //Also we swap (num[l] > num[k]) with num[k] and not num[k+1] as the number will not increase but decrease               in this case
+            reverse(nums.begin()+k+1, nums.end());
+            //we reverse the number from k+1 to the end of the nums array so that the element num[k+1] which is the     greatest element in the range shifts to a lower place value and hence we get the nearest greater permutation
+        }
+    }
+};
