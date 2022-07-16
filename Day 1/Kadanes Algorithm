@@ -1,0 +1,39 @@
+
+Problem Link: https://leetcode.com/problems/maximum-subarray/
+
+class Solution {
+public:
+  
+    void printSubarray(vector<int> &nums, vector<int> &subarray, int n){
+        
+        for(int i = subarray[0]; i <= subarray[1]; i++){
+            cout << nums[i] << " ";
+        }
+    }
+    
+    int maxSubArray(vector<int>& nums) {
+       int sum = 0, maxSum = INT_MIN, n = nums.size();
+        vector<int> subarray;
+        int s = 0;
+        for(int i = 0; i < n; i++){
+            sum += nums[i];
+            if(sum > maxSum){
+                subarray.clear();
+                maxSum = sum;
+                subarray.push_back(s);
+                subarray.push_back(i);
+            }
+            if(sum < 0){
+                sum = 0;
+                s = i+1;
+            }
+        }
+        printSubarray(nums, subarray, n);
+        cout << "\n";
+        return maxSum;
+    }
+};
+
+Time Complexity: O(N) 
+
+Space Complexity:O(1)
