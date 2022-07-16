@@ -1,0 +1,74 @@
+
+https://takeuforward.org/data-structure/stock-buy-and-sell/
+
+Method-1
+#include<bits/stdc++.h>
+using namespace std;
+
+int maxProfit(vector<int> &arr) {
+  int maxPro = 0;
+  int n = arr.size();
+  int minPrice = INT_MAX;
+  for (int i = 0; i < arr.size(); i++) {
+    minPrice = min(minPrice, arr[i]);
+    maxPro = max(maxPro, arr[i] - minPrice);
+  }
+  return maxPro;
+}
+
+int main() {
+  vector<int> arr = {7,1,5,3,6,4};
+  int maxPro = maxProfit(arr);
+  cout << "Max profit is: " << maxPro << endl;
+}
+
+//=============================================================================================
+
+//Method - 2
+
+// Greedy strategy
+
+class Solution {
+public:
+    
+    int maxProfit(vector<int>& prices) {
+        vector<int> v_min{INT_MAX, -1};
+        vector<int> v_max{INT_MIN , -1};
+        int n = prices.size();
+        int ans = 0;
+        for(int i = 0; i < n; i++){
+            
+            // v_min[0] = min(v_min[0],prices[i]);
+            if(v_min[0] > prices[i]){
+                v_min[0] = prices[i];
+                v_min[1] = i;
+            }
+            // v_max[0] = max(v_max[0],prices[i]);
+            if(v_max[0] < prices[i]){
+                v_max[0] = prices[i];
+                v_max[1] = i;
+            }
+            
+            if(v_min[1] > v_max[1]){
+                v_max[0] = INT_MIN;
+                v_max[1] = -1;
+            }
+            else{
+                //Trying to find max profit at every iteration
+                ans = max(ans, v_max[0] - v_min[0]);
+            }
+        }
+        
+        //If final ans i.e max profit = 0 and v_max[0] == INT_MIN || v_min[0] == INT_MAX then ans = 0
+        if(v_max[0] == INT_MIN || v_min[0] == INT_MAX){
+            if(ans == 0){
+                return 0;
+            }
+        }
+        return ans;
+    }
+};
+
+Time complexity: O(n)
+
+Space Complexity: O(1)
