@@ -1,0 +1,101 @@
+
+/*
+METHOD - 1:
+TC: O(n)
+SC: O(1)
+
+1] First we find xor of all elements in the vector/array
+    Let's say the ans is stored in a variable called xor
+2] xor all elements from 1 to n along with xor value obtained by doing xor of elements obtained from array A
+3] We get x ^ y = num
+4] We check the rightmost setbit of num and divide elements in array/ vector into two buckets
+Bucket1 contains elements having their rightmost bit as set and bucket2 contains elements
+having rightmost same bit as unset
+5] We split elements from 1 to n in the buckets 1 and 2 in the same manner as we did for 
+vector/ array A
+6] We do xor of elements all elements in bucket1 and bucket2
+Bucket1 gives the repeating element whereas bucket2 gives the missing element
+
+*/
+
+vector<int> Solution::repeatedNumber(const vector<int> &A) {
+    
+    int xorV = A[0];
+    int n = A.size();
+    
+    for(int i = 1; i < n; i++){
+        xorV = xorV ^ A[i];
+    }
+    for(int i = 1; i <= n; i++){
+        xorV = xorV ^ i;
+    }    
+    // x ^ y = xor
+    // (n&~(n-1)) always return the binary number containing the rightmost set bit as 1.
+    int rightmostSetBitNum = (xorV & ~(xorV-1));
+    
+    int x = 0; // missing
+    int y = 0; // repeating
+    
+    for(int i = 0; i < n; i++){
+        if(A[i] & rightmostSetBitNum){
+            x = x ^ A[i];
+        }
+        else{
+            y = y ^ A[i];
+        }
+    }
+    for(int i = 1; i <= n; i++){
+        if(i & rightmostSetBitNum){
+            x = x ^ i;
+        }
+        else{
+            y = y ^ i;
+        }
+    }
+    int x_count = 0;
+    for(int i = 0; i < n; i++){
+        if(A[i] == x){
+            x_count++;
+        }
+    }
+    
+    if(x_count == 0){
+        return {y,x};
+    }
+    
+    return {x,y};
+}
+
+//=================================================================================================================================
+
+/*
+  Method - 2:
+  TC: O(n)
+  SC: O(1)
+  
+*/
+
+vector<int>missing_repeated_number(const vector<int> &A) {
+    long long int len = A.size();
+
+    long long int S = (len * (len+1) ) /2;
+    long long int P = (len * (len +1) *(2*len +1) )/6;
+    long long int missingNumber=0, repeating=0;
+     
+    for(int i=0;i<A.size(); i++){
+       S -= (long long int)A[i];
+       P -= (long long int)A[i]*(long long int)A[i];
+    }
+     
+    missingNumber = (S + P/S)/2;
+
+    repeating = missingNumber - S;
+
+    vector <int> ans;
+
+    ans.push_back(repeating);
+    ans.push_back(missingNumber);
+
+    return ans;
+}
+
