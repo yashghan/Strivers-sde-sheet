@@ -40,3 +40,6 @@ public:
         return 0;
     }
 };
+
+Approach 2(preferred) -> Moore voting algorithm is as follows:-
+
