@@ -1,0 +1,23 @@
+https://leetcode.com/problems/two-sum/
+
+class Solution {
+public:
+    // Create a map which stores the current element in nums array at current element position
+    // Find if the complement of current element is present in map or else update the map as mentioned in step 1
+    // If found then return the index of current element in nums array along with the index of complement of that element present in the map
+    
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> ans;
+        map<int,int> mp;
+        int n = nums.size();
+        for(int i = 0; i < n; i++){
+            if(mp.find(target - nums[i]) != mp.end()){
+                ans.push_back(mp[target-nums[i]]);
+                ans.push_back(i);
+            }
+            mp[nums[i]] = i;
+        }
+        
+       return ans;
+    }
+};
