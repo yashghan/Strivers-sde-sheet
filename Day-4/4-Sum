@@ -1,5 +1,9 @@
 https://leetcode.com/problems/4sum/
 
+TC: O(N^3) + NLOGN
+SC: O(M*4) WHERE M is the number of quads
+
+
 class Solution {
 public:
     vector<vector<int>> fourSum(vector<int>& num, int target) {
