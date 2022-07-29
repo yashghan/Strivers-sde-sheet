@@ -1,0 +1,37 @@
+
+int n = 5;
+int cnt = 0;
+int front = 0;
+int rear = 0;
+
+push(x){
+    if(cnt == n){
+        return -1;
+    }
+    a[rear % n] = x;
+    rear++;
+    cnt++;
+}
+
+pop(){
+    if(cnt == 0){
+        return -1;
+    }
+    a[front % n] = -1;
+    front++;
+    cnt--;
+}
+
+top(){
+    if(cnt == 0){
+        return -1;
+    }
+    return a[front % n];
+}
+
+// To print elements present in queue
+for(int i = front; i <= rear-1; i++){
+    print(a[i % n]);
+}
+
+// We can tell the size of queue by printing cnt
