@@ -1,5 +1,6 @@
   https://www.codingninjas.com/codestudio/problems/799354?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website
   
+  Approach-1
   TC: O(2n + 2n) = O(n)
   SC: O(n)
 
@@ -24,6 +25,7 @@ Below Solution is for circular array:-
         }
         
         
+Approach-2       
 https://leetcode.com/problems/next-greater-element-i/
 Solution for non circular array:-
 
