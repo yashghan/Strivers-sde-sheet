@@ -1,0 +1,23 @@
+  https://www.codingninjas.com/codestudio/problems/799354?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website
+  
+  TC: O(2n + 2n) = O(n)
+  SC: O(n)
+
+        vector<int> nextGreaterElements(vector<int> &arr, int n) {
+            stack<int> st;
+            vector<int> nge(n, -1);
+            for(int i = 2 * n - 1; i >= 0; i--){
+                while(!st.empty() && st.top() <= arr[i % n]){
+                    st.pop();
+                }
+        
+                if(i < n){
+                    if(!st.empty()){
+                        nge[i] = st.top();
+                    }
+                }
+                st.push(arr[i % n]);
+            }
+            return nge;
+        }
+        
