@@ -1,6 +1,8 @@
 Time Complexity: O ( n x n ) x 4 
 orange will check in 4 directions
 
+https://leetcode.com/problems/rotting-oranges/
+
 Space Complexity: O ( n x n )
 
 class Solution {
