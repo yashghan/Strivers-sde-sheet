@@ -1,3 +1,7 @@
+
+TC: O(nlogn)
+SC: O(n)
+
 https://www.codingninjas.com/codestudio/problems/count-inversions_615?leftPanelTab=0
 
 #include <bits/stdc++.h> 
