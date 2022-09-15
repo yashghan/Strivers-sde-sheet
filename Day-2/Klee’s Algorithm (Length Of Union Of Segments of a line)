@@ -88,13 +88,13 @@ int segmentUnionLength(const vector<
 		// difference between previous and current point.
 		// This is interesting as we don't check whether
 		// current point is opening or closing,
-		if (Counter)
+		if (Counter > 0)
 			result += (points[i].first -
 						points[i-1].first);
 
 		// If this is an ending point, reduce, count of
 		// open points.
-		(points[i].second)? Counter-- : Counter++;
+		(points[i].second == true)? Counter-- : Counter++;
 	}
 	return result;
 }
